@@ -1,33 +1,41 @@
 <template>
 <main class="bg-[#F0772B] h-[1500px] w-full ">
-	<div class="mt-[20px]">
-		<p class="text-[#793409] text-center p-9 text-2xl"> Inicia Sesion para acceder a las demas rutas </p>
 
-		<main class="grid grid-cols-8">
-			<div class="bg-[#793409] py-2 px-[20px] mx-auto col-start-4 col-span-2 rounded-md ">
-				<span class="text-2xl text-white font-semibold   "> registrate/inicia sesion </span>
-			</div>
-		</main>
-
-
+	<div v-if="!UserStore.token">
+    <p class="text-[#793409] text-center pt-[80px] pb-[10px] text-2xl"> Hey, Inicia Sesion para acceder a las demas rutas </p>
+		<AntOpenDrawer> </AntOpenDrawer>
 	</div>
+  <div v-else>
+    <p class="text-[#793409] text-center pt-[80px] pb-[10px] text-2xl"> Gracias por iniciar sesion {{}} </p>
+    <main class="flex flex-col justify-center items-center">
+	    <button class="bg-[#fd4646] px-[30px] rounded-md duration-300 group hover:bg-transparent" @click="CerrarVerdadero">
+		    <p class="text-xl pt-4 text-white font-semibold duration-300 group-hover:text-[#fd4646] group-hover:p-4 group-hover:bg-white group-hover:rounded-md" > Cerrar Sesion </p>
+	    </button>
+    </main>
+  </div>
 
-<!-- <antCarousel></antCarousel> -->
-<vueCarousel> </vueCarousel>
+
+<vueCarouMovil class=" md:hidden"> </VueCarouMovil>
+<vueCarousel class="invisible md:visible"> </vueCarousel>
 
 <vueDragDrop> </vueDragDrop>
-
-
-
+mision victinera
 </main> </template>
 
 <script setup>
 import { computed } from 'vue';
 import vueDragDrop from "../components/vueDragDrop.vue";
 import vueCarousel from '../components/vueCarousel.vue';
+import AntOpenDrawer from '../components/ant/AntOpenDrawer.vue';
+import {useUserStore} from "../stores/example-store";
+import VueCarouMovil from '../components/vueCarouMovil.vue';
 
+const UserStore = useUserStore()
 
-
+const CerrarVerdadero = () => {
+  UserStore.cerrarSesion()
+  Router.push('/')
+}
 
 </script>
 

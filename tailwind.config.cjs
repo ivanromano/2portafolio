@@ -2,7 +2,7 @@
 const withMT = require("@material-tailwind/html/utils/withMT");
 
 module.exports = withMT({
-  content: ["./index.html"],
+  content: ["./index.html", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {},
   },
@@ -60,5 +60,8 @@ module.exports = {
 purge: [
   './public/**/*.html',
      './src/**/*.{js,jsx,ts,tsx,vue}',
+],
+plugins: [
+  require('flowbite/plugin')
 ]
 }

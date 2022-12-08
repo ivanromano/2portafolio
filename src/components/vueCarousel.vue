@@ -1,27 +1,49 @@
 <template>
 <div class="mt-3 mb-[10px]">
-    <Carousel :itemsToShow="4.00" :wrapAround="true" :transition="400" :autoplay="autoplay" >
-      <slide v-for="item in slider" :key="item">
-				<img :src="`${item.img}`" :title="item.funti" :onClick="`Handle${item.id}`" :v-model="item.id" class="rounded-md hover:scale-[1.1] duration-200" >
-      </slide>
+<Carousel :itemsToShow="4.00" :wrapAround="true" :transition="400" :autoplay="autoplay" >
+    <slide v-for="item in slider" :key="item" >
+			<img :src="`${item.img}`" :title="item.funti" :v-model="item.id" @click="showModal(item)" class="rounded-md hover:scale-[1.1] duration-200" >
 
+    </slide>
 
-      <template #addons>
-				<nav class="absolute top-[240px] left-[10px] p-2 rounded-lg bg-[#793409] text-white"> <a-switch v-model:checked="checked" /> modo autoplay </nav>
-        <navigation />
-        <pagination />
-      </template>
-
-    </Carousel>
-	</div>
-
+  <template #addons>
+		<nav class="absolute top-[240px] left-[10px] p-2 rounded-lg bg-[#793409] text-white"> <a-switch v-model:checked="checked" /> modo autoplay </nav>
+    <navigation />
+    <pagination />
   </template>
 
-  <script setup>
-	import { computed, ref } from 'vue';
-  import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel'
+</Carousel>
+<!-- :maskStyle="{opacity: 8}" -->
+<a-modal v-model:visible="visible" width="1000px" :maskClosable="true"  title="Victini is god" @ok="handleOk">
 
-	const checked = ref(false);
+<div v-for="item in imagenModal" :key="item.id">
+<nav class="">
+  <img :src="`${item.img}`" alt="" class="max-h-[200px] float-left">
+  <h4>Name: {{item.title}}</h4>
+  <br>
+  <h4 >Description: {{item.descripcion}}</h4>
+</nav>
+<div class="ml-[600px]"><Donut :at="item.at" :de="item.de" :fer="item.fer" :luc="item.luc" > </Donut> </div>
+
+
+  </div>
+
+    <!-- <p>Some contents...{{imagenModal.id}} </p>
+    <img :src="`${imagenModal.img}`" alt=""> -->
+
+</a-modal>
+
+</div>
+</template>
+
+<script setup>
+import { computed, ref } from 'vue';
+import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel'
+import Donut from "./Donut.vue";
+
+const checked = ref(false);
+const visible = ref(false);
+const imagenModal = ref([])
 
 	const slider = [{
     id: 0,
@@ -50,7 +72,7 @@
   },
 	]
 
-  const autoplay = computed(() => {
+const autoplay = computed(() => {
   if (checked.value === false) {
     return 0
   } if (checked.value === true) {
@@ -58,30 +80,23 @@
   }
 })
 
-const Handle1 = () => {
-  alert("1")
-}
+const showModal = (item) => {
+  visible.value = true;
+  if (item.id === 0) {imagenModal.value = [{id: 0, img: 'https://pbs.twimg.com/media/FXexKZjXgAEJPWC?format=jpg&name=900x900', title: 'Victineripsis', descripcion: 'Victineripsis is the supreme king of luck and believes that luck is the greatest superpower', at: 6, de: 4, fer: 2, luc: 3}]}
+  if (item.id === 1) {imagenModal.value = [{id: 1, img: 'https://pbs.twimg.com/media/FXPQG7FXgAEPTuj?format=jpg&name=900x900', title: 'Victini cookies', descripcion: 'Victini fell asleep thinking about his strategy for stealing cookies. But he slept too long', at: 4, de: 1, fer: 1, luc: 7}]}
+  if (item.id === 2) {imagenModal.value = [{id: 2, img: 'https://pbs.twimg.com/media/FYNHLy7XwAEnV1K?format=jpg&name=900x900', title: 'Natavil', descripcion: 'He el the brother of Leviathan. He has the power to cancel the powers of others, and can create an area where the supernatural does not exist', at: 2, de: 4, fer: 2, luc: 3}]}
+  if (item.id === 3) {imagenModal.value = [{id: 3, img: 'https://pbs.twimg.com/media/FgoS1twXoAA1bui?format=jpg&name=900x900', title: 'Lanzaria', descripcion: 'Have you ever seen a prettier clown?', at: 1, de: 2, fer: 4, luc: 6}]}
+  if (item.id === 4) {imagenModal.value = [{id: 4, img: 'https://pbs.twimg.com/media/FUHPcLjXEAApM9p?format=jpg&name=900x900', title: 'Treetive', descripcion: 'red tree, wise but demanding', at: 6, de: 4, fer: 2, luc: 2}]}
+};
 
-const Handle2 = () => {
-  alert("2")
-}
-
-const Handle3 = () => {
-  alert("3")
-}
-
-// const Handle4 = () => {
-//   alert("4")
-// }
-
-// const Handle5 = () => {
-//   alert("5")
-// }
+const handleOk = e => {
+  visible.value = false;
+};
 
 </script>
 
 
-  <style scoped>
+<style scoped>
   .carousel__slide {
     padding: 1px;
 		padding-left: 40px;
