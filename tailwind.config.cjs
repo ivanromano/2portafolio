@@ -13,7 +13,7 @@ module.exports = {
   mode: 'jit',
   content: [
     "./src/**/*.{js,ts,jsx,vue,tsx}",
-    , "./node_modules/**/*.js",
+    , "./node_modules/**/*.js", "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -22,11 +22,13 @@ module.exports = {
         'night-red': '#FF406F'
       },
 
-      padding: {
-        '0,5': '0.5rem'
+      fontFamily: {
+        'fuente1': ['ui-sans-serif', 'system-ui'],
+        'fuente2': ['ui-serif', 'Georgia'],
+        'fuente3': ['ui-monospace', 'SFMono-Regular'],
+        'fuente4': ['Oswald'],
+        'fuente5': ['"Open Sans"'],
       },
-
-
       // animate-[wave_2s_ease-in-out_infinite]
       keyframes: {
         wave: {
@@ -51,9 +53,7 @@ module.exports = {
 
         // Complex site-specific column configuration
         'footer': '200px minmax(900px, 1fr) 100px',
-      }
-
-
+      },
 
     },
   },

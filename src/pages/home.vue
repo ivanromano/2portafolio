@@ -29,6 +29,7 @@ import vueCarousel from '../components/vueCarousel.vue';
 import AntOpenDrawer from '../components/ant/AntOpenDrawer.vue';
 import {useUserStore} from "../stores/example-store";
 import VueCarouMovil from '../components/vueCarouMovil.vue';
+import Cascada from '../components/ant/Cascada.vue';
 
 const UserStore = useUserStore()
 
@@ -51,3 +52,4 @@ const CerrarVerdadero = () => {
   padding: 5px;
 }
 </style>
+<!-- DC143C -->

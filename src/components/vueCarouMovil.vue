@@ -1,12 +1,12 @@
 <template>
     <div class="mt-3 mb-[10px]">
-    <Carousel :itemsToShow="3.00" :wrapAround="true" :transition="400" :autoplay="autoplay" >
+    <Carousel :wrapAround="true" :transition="400" :autoplay="autoplay" >
         <slide v-for="item in slider" :key="item" >
-                <img :src="`${item.img}`" :title="item.funti" :v-model="item.id" @click="showModal(item)" class="rounded-md hover:scale-[1.1] duration-200" >
-
+            <img :src="`${item.img}`" :title="item.funti" :v-model="item.id" @click="showModal(item)" class="rounded-md hover:scale-[1.1] duration-200" >
         </slide>
 
       <template #addons>
+        <navigation  />
         <pagination />
         <main class="flex flex-col justify-start items-start ml-1 my-3">
 	    <div class="bg-[#fd4646] rounded-md ">
@@ -17,27 +17,21 @@
 
     </Carousel>
     <!-- :maskStyle="{opacity: 8}" -->
-    <a-modal v-model:visible="visible" width="1000px" :maskClosable="true"  title="Victini is god" @ok="handleOk">
-
-    <div v-for="item in imagenModal" :key="item.id">
+<a-modal v-model:visible="visible" width="1000px" :maskClosable="true"  title="Victini is god" @ok="handleOk">
+  <div v-for="item in imagenModal" :key="item.id">
     <nav class="">
       <img :src="`${item.img}`" alt="" class="max-h-[200px] float-left">
-      <h4>Name: {{item.title}}</h4>
+      <h4 class="text-center">Name: {{item.title}}</h4>
       <br>
-      <h4 >Description: {{item.descripcion}}</h4>
+      <h4 class="mt-[165px]">Description: {{item.descripcion}}</h4>
     </nav>
-    <div class="ml-[600px]"><Donut :at="item.at" :de="item.de" :fer="item.fer" :luc="item.luc" > </Donut> </div>
-
-
-      </div>
-
+  	<div class="ml-[600px]"> <Donut :at="item.at" :de="item.de" :fer="item.fer" :luc="item.luc" > </Donut> </div>
+  </div>
         <!-- <p>Some contents...{{imagenModal.id}} </p>
         <img :src="`${imagenModal.img}`" alt=""> -->
+</a-modal>
 
-    </a-modal>
-
-    </div>
-    </template>
+</div></template>
 
     <script setup>
     import { computed, ref } from 'vue';
@@ -100,44 +94,26 @@
 
 
     <style scoped>
-      .carousel__slide {
-        padding: 1px;
-            padding-left: 40px;
-      }
+.carousel__item {
+  min-height: 200px;
+  width: 100%;
+  background-color: var(--vc-clr-primary);
+  color: var(--vc-clr-white);
+  font-size: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-      .carousel__viewport {
-        perspective: 2000px;
-      }
+.carousel__slide {
+  padding: 10px;
+}
 
-      .carousel__track {
-        transform-style: preserve-3d;
-      }
+.carousel__prev,
+.carousel__next {
+  box-sizing: content-box;
+  border: 5px solid white;
+}
 
-      .carousel__slide--sliding {
-        transition: 0.5s;
-      }
-
-      .carousel__slide {
-        opacity: 0.9;
-        transform: rotateY(-20deg) scale(0.9);
-      }
-
-      .carousel__slide--active ~ .carousel__slide {
-        transform: rotateY(20deg) scale(0.9);
-      }
-
-      .carousel__slide--prev {
-        opacity: 1;
-        transform: rotateY(-10deg) scale(0.95);
-      }
-
-      .carousel__slide--next {
-        opacity: 1;
-        transform: rotateY(10deg) scale(0.95);
-      }
-
-      .carousel__slide--active {
-        opacity: 1;
-        transform: rotateY(0) scale(1.1);
-      }
       </style>

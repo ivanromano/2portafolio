@@ -18,7 +18,7 @@ const requireAuth = async(to, from, next) => {
 const routes = [
     {path: '/', component: home},
     {path: '/presupuesto', component: presupuesto, beforeEnter: requireAuth},
-    {path: '/myart', component: myart, beforeEnter: requireAuth},
+    {path: '/myart', component: myart},
     // {path: '/superiorhome', component: SuperiorHome, children: [{
     //     path: '/detalles/:id', component: Detalles
     // }]},

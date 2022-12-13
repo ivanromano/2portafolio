@@ -6,7 +6,10 @@
 	</button>
 </main>
 
-<a-drawer v-model:visible="visible" title="Inicia Sesion" width="25rem" :closable="false" :footer-style="{ textAlign: 'right' }" @close="onClose">
+<a-drawer v-model:visible="visible" title="Inicia Sesion" width="25rem" :closable="false" :footer-style="{ textAlign: 'right' }">
+  <template #extra>
+    <a-button style="margin-right: 8px" @click="onClose">Cancelar</a-button>
+  </template>
   <a-button type="primary" @click="showChildrenDrawer">Te quieres registrar?</a-button>
   <div class="bg-blue-200 h-screen rounded-lg">
       <form @submit.prevent="(HandleLogin)" class="flex flex-col justify-center items-center my-2">
@@ -24,7 +27,11 @@
       {{ UserStore.token }}
     </div>
 
-  <a-drawer v-model:visible="childrenDrawer" title="Registrarse" width="30rem" :closable="false">
+  <a-drawer v-model:visible="childrenDrawer" title="Registrarse" width="20rem" class="custom-class" :closable="false" :footer-style="{ textAlign: 'right' }"  >
+    <template #extra>
+      <a-button style="margin-right: 8px" @click="closeChildrenDrawer">Cancelar</a-button>
+    </template>
+
     <div class="bg-amber-200 h-screen rounded-lg">
       <form @submit.prevent="HandleRegister" method="post" enctype="multipart/form-data" class="flex flex-col justify-center items-center">
         <input type="text" placeholder="ingrese un nombre" v-model.trim="nombre" class="h-[2rem] w-[10rem] rounded-full my-4">
@@ -38,13 +45,13 @@
             Crear Usuario
           </span>
         </button>
-        <!-- <a-button type="submit" >Crear Usuario</a-button> -->
+
 		  </form>
     </div>
   </a-drawer>
 
   <template #footer>
-    <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
+    <!-- <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button> -->
   </template>
 </a-drawer>
 </template>
@@ -135,8 +142,9 @@ const onClose = () => {
 const showChildrenDrawer = () => {
   childrenDrawer.value = true;
   };
-  const warning = () => {
-      message.warning('This is a warning message');
+
+  const closeChildrenDrawer = () => {
+    childrenDrawer.value = false;
     };
 
 </script>

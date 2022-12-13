@@ -92,6 +92,19 @@ export const useUserStore = defineStore("user", () => {
     time.value = null
   }
 
+  const crearTienda = async(product, precio, stock) => {
+    try {
+      await axios.get('https://first-api-node.onrender.com/api/v1/tienda/creatienda', {
+        product: product,
+        precio: precio,
+        stock: stock,
+      })
+      console.log('nun');
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return {
     token,
     time,
@@ -100,5 +113,6 @@ export const useUserStore = defineStore("user", () => {
     cerrarSesion,
     setTime,
     refreshToken,
+    crearTienda
   };
 });
